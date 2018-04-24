@@ -3,7 +3,7 @@ var long;
 var temp;
 var minTemp, maxTemp;
 var windDir;
-var ForC = $("#degree");
+var ForC;
 var options = {
   enableHighAccuracy: true,
   timeout: 5500,
@@ -13,7 +13,8 @@ var weatherURL = "https://fcc-weather-api.glitch.me/api/current?";
 var sunrise;
 
 $(document).ready(function() {
-  getLocation();
+    ForC = $("#degree");
+    getLocation();
 });
 
 function getLocation() {
@@ -29,84 +30,98 @@ function posSuccess(pos) {
   long = precisionRound(pos.coords.longitude, 4);
   
   weatherURL = weatherURL + "lat=" + lat + "&lon=" + long;
-  
-  $.ajax({
-    dataType: "json",
-    url: weatherURL,
-    success: function(json) {
-      $("#city").html(json["name"] + ", " + json["sys"]["country"]);
-      temp = json["main"]["temp"];
-      minTemp = json["main"]["temp_min"];
-      maxTemp = json["main"]["temp_max"];
-      $("#temp").html(json["main"]["temp"]);
-      $("#weatherDesc").html(json["weather"][0]["description"]);
-      $("#pressure").html("<strong>Pressure: </strong>" + json["main"]["pressure"] + " hPa");
-      $("#humidity").html("<strong>Humidity: </strong>" + json["main"]["humidity"] + " %");
-      $("#maxTemp").html("<strong>Max Temp: </strong>" + json["main"]["temp_max"]);
-      $("#visibility").html("<strong>Visibility: </strong>" + json["visibility"] + " m");
-      $("#wind-speed").html("<strong>Wind Speed: </strong>" + json["wind"]["speed"] + " m/s");
-      findWindDir(json);
-      $("#minTemp").html("<strong>Min Temp: </strong>" + json["main"]["temp_min"]);
-      
-      //if the country is US, set the degrees in Fahrenheit by default
-      if (json["sys"]["country"] === "US") {
-        ForC.html("<strong>F</strong>");
-        temp = precisionRound((temp * 1.8) + 32, 2);
-        minTemp = precisionRound((minTemp * 1.8) + 32, 2);
-        maxTemp = precisionRound((maxTemp * 1.8) + 32, 2);
-        $("#temp").html(temp);
-        $("#minTemp").html("<strong>Min Temp: </strong>" + minTemp);
-        $("#maxTemp").html("<strong>Max Temp: </strong>" + maxTemp);
-      } else {
-        ForC.html("<strong>C</strong>");
-      }
-      
-      //add a click function to interchange between C and F degrees
-      ForC.click(function() {
-        if ($("#degree").text() === 'C') {
-          temp = precisionRound((temp * 1.8) + 32, 2);
-          minTemp = precisionRound((minTemp * 1.8) + 32, 2);
-          maxTemp = precisionRound((maxTemp * 1.8) + 32, 2);
-          $("#temp").html(temp);
-          $("#minTemp").html("<strong>Min Temp: </strong>" + minTemp);
-          $("#maxTemp").html("<strong>Max Temp: </strong>" + maxTemp);
-          ForC.html("<strong>F</strong>");
-        } else {
-          temp = precisionRound((temp - 32) / 1.8, 2);
-          minTemp = precisionRound((minTemp - 32) / 1.8, 2);
-          maxTemp = precisionRound((maxTemp - 32) / 1.8, 2);
-          $("#temp").html(temp);
-          $("#minTemp").html("<strong>Min Temp: </strong>" + minTemp);
-          $("#maxTemp").html("<strong>Max Temp: </strong>" + maxTemp);
-          ForC.html("<strong>C</strong>");
-        }
-      });
-    
-      //getting sunrise and sunset data formatted
-      var rise = json["sys"]["sunrise"];
-      var set = json["sys"]["sunset"];
-      var now = new Date();
-      var d1 = new Date(rise * 1000);
-      var d2 = new Date(set * 1000);
-      
-      var d1h = d1.getHours();
-      var d1m = d1.getMinutes(); var min1Str = "";
-      if (d1h > 12) d1h -= 12;
-      if (d1m < 10) min1Str = "0";
-      min1Str += d1m;
-      
-      var d2h = d2.getHours();
-      var d2m = d2.getMinutes(); var min2Str = "";
-      if (d2h > 12) d2h -= 12;
-      if (d2m < 10) min2Str = "0";
-      min2Str += d2m;
-      
-      $("#sunrise").html("<strong>Sunrise: </strong>" + d1h + ":" + min1Str + "AM");
-      $("#sunset").html("<strong>Sunset: </strong>" + d2h + ":" + min2Str + "PM");
-    }
-  });
+  $("#weathBtn").prop("disabled", false);
+  $("#city").html("Location Acquired. Get Weather now.");
+  $("#weatherDesc").html("Lat: " + lat + " || Long: " + long);
   
 }
+
+function getWeather() {
+
+    $.ajax({
+        dataType: "json",
+        url: weatherURL,
+        success: function(json) {
+            $("#city").html(json["name"] + ", " + json["sys"]["country"]);
+            temp = json["main"]["temp"];
+            minTemp = json["main"]["temp_min"];
+            maxTemp = json["main"]["temp_max"];
+            $("#temp").html(json["main"]["temp"]);
+            $("#weatherDesc").html(json["weather"][0]["description"]);
+            $("#pressure").html("<strong>Pressure: </strong>" + json["main"]["pressure"] + " hPa");
+            $("#humidity").html("<strong>Humidity: </strong>" + json["main"]["humidity"] + " %");
+            $("#maxTemp").html("<strong>Max Temp: </strong>" + json["main"]["temp_max"]);
+            $("#visibility").html("<strong>Visibility: </strong>" + json["visibility"] + " m");
+            $("#wind-speed").html("<strong>Wind Speed: </strong>" + json["wind"]["speed"] + " m/s");
+            findWindDir(json);
+            $("#minTemp").html("<strong>Min Temp: </strong>" + json["main"]["temp_min"]);
+          
+          //if the country is US, set the degrees in Fahrenheit by default
+            if (json["sys"]["country"] === "US") {
+                ForC.html("<strong>F</strong>");
+                temp = precisionRound((temp * 1.8) + 32, 2);
+                minTemp = precisionRound((minTemp * 1.8) + 32, 2);
+                maxTemp = precisionRound((maxTemp * 1.8) + 32, 2);
+                $("#temp").html(temp);
+                $("#minTemp").html("<strong>Min Temp: </strong>" + minTemp);
+                $("#maxTemp").html("<strong>Max Temp: </strong>" + maxTemp);
+            } else {
+                ForC.html("<strong>C</strong>");
+            }
+          
+            //getting sunrise and sunset data formatted
+            var rise = json["sys"]["sunrise"];
+            var set = json["sys"]["sunset"];
+            var now = new Date();
+            var d1 = new Date(rise * 1000);
+            var d2 = new Date(set * 1000);
+            
+            var d1h = d1.getHours();
+            var d1m = d1.getMinutes(); var min1Str = "";
+            if (d1h > 12) d1h -= 12;
+            if (d1m < 10) min1Str = "0";
+            min1Str += d1m;
+            
+            var d2h = d2.getHours();
+            var d2m = d2.getMinutes(); var min2Str = "";
+            if (d2h > 12) d2h -= 12;
+            if (d2m < 10) min2Str = "0";
+            min2Str += d2m;
+            
+            $("#sunrise").html("<strong>Sunrise: </strong>" + d1h + ":" + min1Str + "AM");
+            $("#sunset").html("<strong>Sunset: </strong>" + d2h + ":" + min2Str + "PM");
+
+            $("#weathBtn").prop("disabled", true);
+
+            ForC.click(function() {
+              if ($("#degree").text() === 'C') {
+                  temp = precisionRound((temp * 1.8) + 32, 2);
+                  minTemp = precisionRound((minTemp * 1.8) + 32, 2);
+                  maxTemp = precisionRound((maxTemp * 1.8) + 32, 2);
+                  $("#temp").html(temp);
+                  $("#minTemp").html("<strong>Min Temp: </strong>" + minTemp);
+                  $("#maxTemp").html("<strong>Max Temp: </strong>" + maxTemp);
+                  ForC.html("<strong>F</strong>");
+              } else {
+                  temp = precisionRound((temp - 32) / 1.8, 2);
+                  minTemp = precisionRound((minTemp - 32) / 1.8, 2);
+                  maxTemp = precisionRound((maxTemp - 32) / 1.8, 2);
+                  $("#temp").html(temp);
+                  $("#minTemp").html("<strong>Min Temp: </strong>" + minTemp);
+                  $("#maxTemp").html("<strong>Max Temp: </strong>" + maxTemp);
+                  ForC.html("<strong>C</strong>");
+              }
+          });
+
+
+
+        }//end success function
+    });//end ajax call
+
+}//end getWeather function
+
+//add a click function to interchange between C and F degrees
+
 
 function posError(err) {
   switch (err) {
