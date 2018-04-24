@@ -1,0 +1,36 @@
+body {
+    background-color: #DDDDDD;
+  }
+  .container {
+    background-color: #FFF;
+    padding-top: 8px;
+  }
+  
+  .header {
+    background-color: #4C2736;
+    color: white;
+    padding: 5px;
+  }
+  
+  #degree {
+    cursor: pointer;
+    color: red;
+    font-size: 22pt;
+  }
+  
+  #temp {
+    font-size: 22pt;
+  }
+  
+  .spacer {
+    height: 20px;
+  }
+  
+  .extra-data {
+    margin: 8px 0;
+    padding: 5px;
+    background-color: #DDDDDD;
+  }
+  .extra-data div {
+    padding: 5px;
+  }

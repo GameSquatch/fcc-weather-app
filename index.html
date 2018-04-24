@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="design.css">
+    <script src="script.js"></script>
+</head>
+<body>
+    
+    <div class="row header">
+        <div class="col-sm-12 text-center">
+          <h1>Zeke's Local Weather Report</h1>
+        </div>
+    </div>
+      
+    <div class="container">
+    
+        <div class="row">
+            <div class="col-sm-12 text-center">
+            <h3 id="city">LOADING...</h3>
+            <span id="temp"></span>
+            <a id="degree"></a>
+            <h4 id="weatherDesc"></h4>
+            </div>
+        </div>
+            
+        <div class="spacer"></div>
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-3 text-center" id="sunrise">
+            
+            </div>
+            <div class="col-sm-3 text-center" id="sunset">
+            
+            </div>
+            <div class="col-sm-3"></div>
+        </div>
+        <div class="spacer"></div>
+        
+        <div class="row">
+            <div class="col-sm-12 text-center">
+            More Info
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-3 text-center extra-data">
+            <div id="pressure"></div>
+            <div id="humidity"></div>
+            <div id="visibility"></div>
+            <div id="wind-dir"></div>
+            </div>
+            
+            <div class="col-sm-3 text-center extra-data">
+            <div id="maxTemp"></div>
+            <div id="minTemp"></div>
+            <div id="wind-speed"></div>
+            </div>
+            <div class="col-sm-3"></div>
+        </div>
+    
+    </div>
+
+</body>
+</html>
