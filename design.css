@@ -1,36 +1,30 @@
 body {
-    background-color: #DDDDDD;
-  }
-  .container {
-    background-color: #FFF;
-    padding-top: 8px;
-  }
-  
-  .header {
-    background-color: #4C2736;
-    color: white;
-    padding: 5px;
-  }
-  
-  #degree {
-    cursor: pointer;
-    color: red;
-    font-size: 22pt;
-  }
-  
-  #temp {
-    font-size: 22pt;
-  }
-  
-  .spacer {
-    height: 20px;
-  }
-  
-  .extra-data {
-    margin: 8px 0;
-    padding: 5px;
-    background-color: #DDDDDD;
-  }
-  .extra-data div {
-    padding: 5px;
-  }
+  background-color: #FFF;
+  padding: 0;
+  margin: 0;
+}
+
+#left-content {
+  background-color: #FFF;
+  padding: 10px 0 10px 20px;
+}
+#right-content {
+  background-color: black;
+  color: white;
+}
+h3 {
+  margin: 0;
+}
+#degree {
+  cursor: pointer;
+  color: red;
+  font-size: 40pt;
+}
+
+#temp {
+  font-size: 40pt;
+}
+
+.spacer {
+  height: 20px;
+}
