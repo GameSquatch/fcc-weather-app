@@ -46,7 +46,7 @@ function getWeather() {
             temp = json["main"]["temp"];
             minTemp = json["main"]["temp_min"];
             maxTemp = json["main"]["temp_max"];
-            $("#temp").html(json["main"]["temp"]);
+            $("#temp").html(json["main"]["temp"] + "&deg;");
             $("#weatherDesc").html(json["weather"][0]["description"]);
             $("#pressure").html("<strong>Pressure: </strong>" + json["main"]["pressure"] + " hPa");
             $("#humidity").html("<strong>Humidity: </strong>" + json["main"]["humidity"] + " %");
@@ -62,7 +62,7 @@ function getWeather() {
                 temp = precisionRound((temp * 1.8) + 32, 2);
                 minTemp = precisionRound((minTemp * 1.8) + 32, 2);
                 maxTemp = precisionRound((maxTemp * 1.8) + 32, 2);
-                $("#temp").html(temp);
+                $("#temp").html(temp + "&deg;");
                 $("#minTemp").html("<strong>Min Temp: </strong>" + minTemp);
                 $("#maxTemp").html("<strong>Max Temp: </strong>" + maxTemp);
             } else {
@@ -103,7 +103,7 @@ function getWeather() {
                   temp = precisionRound((temp * 1.8) + 32, 2);
                   minTemp = precisionRound((minTemp * 1.8) + 32, 2);
                   maxTemp = precisionRound((maxTemp * 1.8) + 32, 2);
-                  $("#temp").html(temp);
+                  $("#temp").html(temp + "&deg;");
                   $("#minTemp").html("<strong>Min Temp: </strong>" + minTemp);
                   $("#maxTemp").html("<strong>Max Temp: </strong>" + maxTemp);
                   ForC.html("<strong>F</strong>");
@@ -111,7 +111,7 @@ function getWeather() {
                   temp = precisionRound((temp - 32) / 1.8, 2);
                   minTemp = precisionRound((minTemp - 32) / 1.8, 2);
                   maxTemp = precisionRound((maxTemp - 32) / 1.8, 2);
-                  $("#temp").html(temp);
+                  $("#temp").html(temp + "&deg;");
                   $("#minTemp").html("<strong>Min Temp: </strong>" + minTemp);
                   $("#maxTemp").html("<strong>Max Temp: </strong>" + maxTemp);
                   ForC.html("<strong>C</strong>");

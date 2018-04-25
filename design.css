@@ -30,5 +30,17 @@ h3 {
 }
 
 #sunrise {
-  margin: 0 0 8px 20px;
+  margin: 10px 0;
+  font-size: 18pt;
+}
+#sunset {
+  margin: 10px 0;
+  font-size: 18pt;
+}
+
+#right-content div {
+  padding: 8px;
+  margin: 2px 0;
+  font-size: 18pt;
+  background-color: rgb(46, 46, 46)
 }
