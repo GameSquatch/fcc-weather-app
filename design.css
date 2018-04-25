@@ -28,3 +28,7 @@ h3 {
 .spacer {
   height: 20px;
 }
+
+#sunrise {
+  margin: 0 0 8px 20px;
+}

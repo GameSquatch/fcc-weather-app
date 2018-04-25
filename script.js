@@ -91,7 +91,12 @@ function getWeather() {
             $("#sunrise").html("<strong>Sunrise: </strong>" + d1h + ":" + min1Str + "AM");
             $("#sunset").html("<strong>Sunset: </strong>" + d2h + ":" + min2Str + "PM");
 
-            $("#weathBtn").prop("disabled", true);
+            if (Math.round(json.coord.lat) != Math.round(lat) && Math.round(json.coord.lon) != Math.round(long)) {
+              //do nothing
+            }
+            else {
+              $("#weathBtn").prop("disabled", true);
+            }
 
             ForC.click(function() {
               if ($("#degree").text() === 'C') {
