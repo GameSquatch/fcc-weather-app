@@ -37,6 +37,7 @@ function posSuccess(pos) {
 }
 
 function getWeather() {
+  $("#weathBtn").prop("disabled", true);
 
     $.ajax({
         dataType: "json",
@@ -93,9 +94,11 @@ function getWeather() {
 
             if (Math.round(json.coord.lat) != Math.round(lat) && Math.round(json.coord.lon) != Math.round(long)) {
               //do nothing
+              $("#weathBtn").prop("disabled", false);
             }
             else {
-              $("#weathBtn").prop("disabled", true);
+              //$("#weathBtn").prop("disabled", true);
+              $("#weathBtn").css("display", "none");
             }
 
             ForC.click(function() {
